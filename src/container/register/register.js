@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import {List, InputItem, WingBlank, WhiteSpace, Button, Radio} from 'antd-mobile'
+import { connect } from 'react-redux'
 
 import Logo from '../../component/logo/logo'
 import UserName from '../../static/img/yonghuming.png'
 import Password from '../../static/img/mima.png'
 import Client from '../../static/img/kehuguanli.png'
 import Service from '../../static/img/kefu.png'
+
+import { register } from '../../actions/user_actions'
 
 const RadioItem = Radio.RadioItem;
 
@@ -25,13 +28,14 @@ class Register extends Component {
         })
     }
     handleRegister = () => {
-        console.log(this.state)
+        this.props.register(this.state)
     }
     render() {
         return (
             <div>
                 <Logo></Logo>
                 <WingBlank>
+                    {this.props.msg? <p>{this.props.msg}</p>:null}
                     <List>
                         <InputItem
                             placeholder = 'Username'
@@ -77,4 +81,12 @@ class Register extends Component {
     }
 }
 
-export default Register
+const mapStateToProps = (state) => state.user
+const mapDispatchToProps = {
+  register
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Register)
