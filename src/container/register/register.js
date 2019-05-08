@@ -13,8 +13,19 @@ class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            userName: '',
+            pwd: '',
+            repeatPwd: '',
             type: 'Client'
         }
+    }
+    handleChange = (key, val) => {
+        this.setState({
+            [key]:val
+        })
+    }
+    handleRegister = () => {
+        console.log(this.state)
     }
     render() {
         return (
@@ -24,30 +35,41 @@ class Register extends Component {
                     <List>
                         <InputItem
                             placeholder = 'Username'
+                            onChange = {v=>this.handleChange('userName', v)}
                         >
                             <div style={{ backgroundImage: `url(${UserName})`, backgroundSize: 'cover', height: '22px', width: '22px' }} />
                         </InputItem>
                         <InputItem
                             placeholder = 'Password'
+                            onChange = {v=>this.handleChange('pwd', v)}
+                            type='password'
                         >
                             <div style={{ backgroundImage: `url(${Password})`, backgroundSize: 'cover', height: '22px', width: '22px' }} />
                         </InputItem>
                         <InputItem
                             placeholder = 'Confirm Password'
+                            onChange = {v=>this.handleChange('repeatPwd', v)}
+                            type='password'
                         >
                             <div style={{ backgroundImage: `url(${Password})`, backgroundSize: 'cover', height: '22px', width: '22px' }} />
                         </InputItem>
                         <RadioItem
                             checked={this.state.type === 'Client'}
+                            onChange = {()=>this.handleChange('type', 'Client')}
                         >
                             <div style={{ backgroundImage: `url(${Client})`, backgroundSize: 'cover', height: '22px', width: '22px' }} />
                         </RadioItem>
                         <RadioItem
                             checked={this.state.type === 'Service'}
+                            onChange = {()=>this.handleChange('type', 'Service')}
                         >
                             <div style={{ backgroundImage: `url(${Service})`, backgroundSize: 'cover', height: '22px', width: '22px' }} />
                         </RadioItem>
                     </List>
+                </WingBlank>
+                <WhiteSpace />
+                <WingBlank>
+                    <Button onClick={this.handleRegister} type='primary'>Sign up</Button>
                 </WingBlank>
 
             </div>
