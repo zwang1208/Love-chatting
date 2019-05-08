@@ -9,6 +9,7 @@ import reducers from './reducers/index'
 import './config'
 import Login from './container/login/login';
 import Register from './container/register/register';
+import AuthRoute from './component/authRoute/authRoute'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -21,6 +22,7 @@ ReactDOM.render(
         <Provider store={store}>
             <BrowserRouter>
                 <div>
+                    <AuthRoute></AuthRoute>
                     <Route path='/login' component={Login}></Route>
                     <Route path='/register' component={Register}></Route>
                 </div>
