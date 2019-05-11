@@ -1,5 +1,5 @@
 import * as types from '../constants/action_types'
-import { errMsg } from '../actions/user_actions'
+// import { errMsg } from '../actions/user_actions'
 
 const initState = {
     isAuth:false,
