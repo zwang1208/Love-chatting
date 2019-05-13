@@ -9,7 +9,7 @@ mongoose.connection.on('connected', function(){
 
 const models = {
     user: {
-        'username': {type: String, require: true},
+        'userName': {type: String, require: true},
         'pwd': {type: String, require: true},
         'type' : {type: String, require: true},
         'avatar' : {type: String},
