@@ -15,7 +15,7 @@ Router.get('/info', function(req, res){
 Router.post('/register', function(req, res){
     console.log(req.body)
     const {userName, pwd, type} = req.body;
-    User.find({userName}, function(err, doc){
+    User.findOne({userName}, function(err, doc){
         if(doc) {
             return res.json({code: 1, msg: 'Duplicate username'})
         }
