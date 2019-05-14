@@ -8,6 +8,8 @@ import Password from '../../static/img/mima.png'
 import Client from '../../static/img/kehuguanli.png'
 import Service from '../../static/img/kefu.png'
 
+import { Redirect } from 'react-router-dom'
+
 import { register } from '../../actions/user_actions'
 
 const RadioItem = Radio.RadioItem;
@@ -33,6 +35,7 @@ class Register extends Component {
     render() {
         return (
             <div>
+                {this.props.redirectTo? <Redirect to={this.props.redirectTo}/> : null}
                 <Logo></Logo>
                 <WingBlank>
                     {this.props.msg? <p>{this.props.msg}</p>:null}
