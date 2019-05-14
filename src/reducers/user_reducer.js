@@ -15,6 +15,8 @@ export function user(state = initState, action) {
     switch(action.type) {
         case types.REGISTER_SUCCESS:
             return {...state, msg:'', redirectTo: getRedirectPath(action.payload), isAuth: true, ...action.payload}
+        case types.LOGIN_SUCCESS:
+            return {...state, msg:'', redirectTo: getRedirectPath(action.payload), isAuth: true, ...action.payload}
         case types.ERROR_MSG:
             return {...state, isAuth: false, msg: action.msg}
         default:
