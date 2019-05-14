@@ -27,11 +27,11 @@ Router.post('/login', function(req, res){
 Router.post('/register', function(req, res){
     console.log(req.body)
     const {userName, pwd, type} = req.body;
-    User.findOne({userName}, function(err, doc){
-        if(doc) {
+    User.findOne({userName}, function(err, doc){            //look for username
+        if(doc) {                                               
             return res.json({code: 1, msg: 'Duplicate username'})
         }
-        User.create({userName,type, pwd: md5Pwd(pwd)}, function(err, doc){
+        User.create({userName,type, pwd: md5Pwd(pwd)}, function(err, doc){ //didn't find, create new one
             if(err) {
                 return res.json({code: 1, msg:'server error'})
             }
