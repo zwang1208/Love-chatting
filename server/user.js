@@ -1,4 +1,5 @@
 const express = require('express')
+const utils = require('utility')
 const Router = express.Router()
 const model = require('./model')
 const User = model.getModel('user')
@@ -19,7 +20,7 @@ Router.post('/register', function(req, res){
         if(doc) {
             return res.json({code: 1, msg: 'Duplicate username'})
         }
-        User.create({userName, pwd, type}, function(err, doc){
+        User.create({userName,type, pwd: md5Pwd(pwd)}, function(err, doc){
             if(err) {
                 return res.json({code: 1, msg:'server error'})
             }
@@ -27,5 +28,10 @@ Router.post('/register', function(req, res){
         })
     })
 })
+
+function md5Pwd(pwd) {
+    const salt = 'i_love_chattingx85275!*&%$#9348sklmf~~/\=+-';
+    return utils.md5(utils.md5(pwd+salt))
+}
 
 module.exports = Router;
