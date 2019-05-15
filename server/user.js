@@ -4,6 +4,8 @@ const Router = express.Router()
 const model = require('./model')
 const User = model.getModel('user')
 
+const _filter = {pwd: 0, __v: 0}
+
 Router.get('/list', function(req, res){
     //User.remove({},function(e,d){}) //remove all items
     User.find({}, function(err, doc){
@@ -11,15 +13,28 @@ Router.get('/list', function(req, res){
     })
 })
 Router.get('/info', function(req, res){
-    return res.json({code: 1})
+    console.log(req.cookies)
+    const { userid } = req.cookies;
+    if(!userid) {
+        return res.json({code: 1})
+    }
+    User.findOne({_id: userid}, _filter, function(err, doc){
+        if(err) {
+            return res.json({code: 1, msg: 'server error'})
+        }
+        if(doc) {
+            return res.json({code: 0, data: doc})
+        }
+    })
 })
 
 Router.post('/login', function(req, res){
     const {userName, pwd} = req.body;
-    User.findOne({userName, pwd: md5Pwd(pwd)}, {pwd: 0}, function(err, doc){    //not return password
+    User.findOne({userName, pwd: md5Pwd(pwd)}, _filter, function(err, doc){    //not return password
         if(!doc) {
             return res.json({code: 1, msg: 'Username or Password is incorrect.'})
         }
+        res.cookie('userid', doc._id)
         return res.json({code:0, data: doc})
     })
 })
