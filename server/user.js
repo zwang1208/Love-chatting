@@ -46,12 +46,21 @@ Router.post('/register', function(req, res){
         if(doc) {                                               
             return res.json({code: 1, msg: 'Duplicate username'})
         }
-        User.create({userName,type, pwd: md5Pwd(pwd)}, function(err, doc){ //didn't find, create new one
+        const userModel = new User({userName,type, pwd: md5Pwd(pwd)}); // use save() can get id
+        userModel.save(function(err, doc){
             if(err) {
                 return res.json({code: 1, msg:'server error'})
             }
-            return res.json({code: 0})
+            const {userName, type, _id} = doc;
+            res.cookie('userid', _id);
+            return res.json({code: 0, data: {userName, type, _id}})
         })
+        // User.create({userName,type, pwd: md5Pwd(pwd)}, function(err, doc){  
+        //     if(err) {
+        //         return res.json({code: 1, msg:'server error'})
+        //     }
+        //     return res.json({code: 0})
+        // })
     })
 })
 

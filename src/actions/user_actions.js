@@ -15,6 +15,10 @@ const loginSuccess = (data) => {
     return {type: types.LOGIN_SUCCESS, payload: data}
 }
 
+export const loadInfo = (data) => {
+    return {type: types.LOAD_DATA, payload: data}
+}
+
 export const login = ({userName, pwd}) => {
     if(!userName || !pwd) {
         return errMsg('Username and password cannot be empty')

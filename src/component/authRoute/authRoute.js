@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { loadInfo } from '../../actions/user_actions'
 
 class AuthRoute extends Component {
     componentDidMount() {
@@ -12,7 +14,7 @@ class AuthRoute extends Component {
         axios.get('/user/info').then(res=>{
             if(res.status === 200) {
                 if(res.data.code === 0) {
-
+                    this.props.loadInfo(res.data.data)
                 }else {
                     this.props.history.push('/login')
                 }
@@ -24,4 +26,14 @@ class AuthRoute extends Component {
     }
 }
 
-export default withRouter(AuthRoute)
+const mapStateToProps = (state) => state.user
+const mapDispatchToProps = {
+    loadInfo
+}
+
+export default withRouter(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(AuthRoute)
+)
