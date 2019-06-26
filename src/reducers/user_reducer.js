@@ -4,7 +4,6 @@ import { getRedirectPath } from '../utli'
 
 const initState = {
     redirectTo:'',
-    isAuth:false,
     msg:'',
     userName:'',
     type: ''
@@ -12,10 +11,8 @@ const initState = {
 
 export function user(state = initState, action) {
     switch(action.type) {
-        case types.REGISTER_SUCCESS:
-            return {...state, msg:'', redirectTo: getRedirectPath(action.payload), isAuth: true, ...action.payload}
-        case types.LOGIN_SUCCESS:
-            return {...state, msg:'', redirectTo: getRedirectPath(action.payload), isAuth: true, ...action.payload}
+        case types.AUTH_SUCCESS:
+            return {...state, msg:'', redirectTo: getRedirectPath(action.payload), ...action.payload}
         case types.LOAD_DATA:
             return {...state, ...action.payload}
         case types.ERROR_MSG:

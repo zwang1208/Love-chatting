@@ -6,6 +6,9 @@ class AvatarSelector extends Component {
         super(props)
         this.state = {}
     }
+    handleClick =(elm)=>{
+        this.setState(elm)
+    }
     render() {
         const avatarList = 'boy,girl,man,woman,bull,chick,crab,hedgehog,hippopotamus,koala,lemur,pig,tiger,whale,zebra'
                             .split(',')
@@ -27,7 +30,7 @@ class AvatarSelector extends Component {
                     data={avatarList}
                     columnNum={5} 
                     onClick = {elm=>{
-                        this.setState(elm)
+                        this.handleClick(elm)
                         this.props.selectAvatar(elm.text)
                     }} />
                 </List>

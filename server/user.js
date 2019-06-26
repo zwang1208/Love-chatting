@@ -7,7 +7,7 @@ const User = model.getModel('user')
 const _filter = {pwd: 0, __v: 0}
 
 Router.get('/list', function(req, res){
-    //User.remove({},function(e,d){}) //remove all items
+    //git User.remove({},function(e,d){}) //remove all items
     User.find({}, function(err, doc){
         return res.json(doc)
     })
@@ -28,6 +28,20 @@ Router.get('/info', function(req, res){
     })
 })
 
+Router.post('/update', function(req, res){
+    const {userid} = req.cookies;
+    if(!userid) {
+        return json.dumps({code:1})
+    }
+    User.findByIdAndUpdate(userid, req.body, function(err, doc){
+        const data = Object.assign({}, {
+            userName: doc.userName,
+            type: doc.type
+        }, req.body)
+        return res.json({code:0, data})
+    })
+})
+
 Router.post('/login', function(req, res){
     const {userName, pwd} = req.body;
     User.findOne({userName, pwd: md5Pwd(pwd)}, _filter, function(err, doc){    //not return password
@@ -40,7 +54,6 @@ Router.post('/login', function(req, res){
 })
 
 Router.post('/register', function(req, res){
-    console.log(req.body)
     const {userName, pwd, type} = req.body;
     User.findOne({userName}, function(err, doc){            //look for username
         if(doc) {                                               

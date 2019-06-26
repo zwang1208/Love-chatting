@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
-import { NavBar, InputItem, TextareaItem } from 'antd-mobile'
+import { NavBar, InputItem, TextareaItem, Button } from 'antd-mobile'
+import { update } from '../../actions/user_actions'
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
 import AvatarSelector from '../../component/avatar_selector/avatar_selector'
 
 class ServiceInfo extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             title: '',
             serviceType: ''
@@ -16,15 +19,19 @@ class ServiceInfo extends Component {
             [key]: val
         }) 
     }
+    selectAvatar = (elm) => {
+        this.setState( {
+            avatar: elm
+        })
+    }
     render() {
+        const redirect = this.props.redirectTo
+        const path = this.props.location.pathname
         return (
             <div>
+                {redirect && redirect!==path? <Redirect to = {this.props.redirectTo}></Redirect> : null}
                 <NavBar mode="dark">Service Info</NavBar>
-                <AvatarSelector selectAvatar = {elm =>{
-                    this.setState({
-                        avatar: elm
-                    })
-                }}></AvatarSelector>
+                <AvatarSelector selectAvatar = {this.selectAvatar}></AvatarSelector>
                 <InputItem onChange={(v)=>this.handlechange('title', v)}>
                     Title
                 </InputItem>
@@ -33,9 +40,21 @@ class ServiceInfo extends Component {
                     rows = {3}
                     onChange={(v)=>this.handlechange('serviceType', v)}>
                 </TextareaItem>
+                <Button
+                    onClick = {() => this.props.update(this.state)}
+                    type = 'primary'
+                >Save</Button>
             </div>
         )
     }
 }
 
-export default ServiceInfo
+const mapStateToProps = state => state.user;
+const mapDispatchToProps = {
+    update
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ServiceInfo)
