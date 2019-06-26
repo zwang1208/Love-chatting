@@ -14,7 +14,8 @@ const models = {
         'type' : {type: String, require: true},
         'avatar' : {type: String},
         'desc' : {type: String},
-        'title' : {type: String}
+        'title' : {type: String},
+        'serviceType' : {type: String}
     },
     chat: {
 
