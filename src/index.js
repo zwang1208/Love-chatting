@@ -11,6 +11,7 @@ import Login from './container/login/login';
 import Register from './container/register/register';
 import AuthRoute from './component/authRoute/authRoute'
 import ServiceInfo from './container/service_info/service_info'
+import ClientInfo from './container/client_info/client_info'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -27,6 +28,7 @@ ReactDOM.render(
                     <Route path='/login' component={Login}></Route>
                     <Route path='/register' component={Register}></Route>
                     <Route path='/serviceinfo' component={ServiceInfo}></Route>
+                    <Route path='/clientinfo' component={ClientInfo}></Route>
                 </div>
             </BrowserRouter>
         </Provider>
