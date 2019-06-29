@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import thunk from 'redux-thunk';
 import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import reducers from './reducers/index'
 import './config'
@@ -12,6 +12,7 @@ import Register from './container/register/register';
 import AuthRoute from './component/authRoute/authRoute'
 import ServiceInfo from './container/service_info/service_info'
 import ClientInfo from './container/client_info/client_info'
+import Dashboard from './component/dashboard/dashboard'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -25,10 +26,13 @@ ReactDOM.render(
             <BrowserRouter>
                 <div>
                     <AuthRoute></AuthRoute>
-                    <Route path='/login' component={Login}></Route>
-                    <Route path='/register' component={Register}></Route>
-                    <Route path='/serviceinfo' component={ServiceInfo}></Route>
-                    <Route path='/clientinfo' component={ClientInfo}></Route>
+                    <Switch>
+                        <Route path='/login' component={Login}></Route>
+                        <Route path='/register' component={Register}></Route>
+                        <Route path='/serviceinfo' component={ServiceInfo}></Route>
+                        <Route path='/clientinfo' component={ClientInfo}></Route>
+                        <Route component={Dashboard}></Route>
+                    </Switch>
                 </div>
             </BrowserRouter>
         </Provider>
