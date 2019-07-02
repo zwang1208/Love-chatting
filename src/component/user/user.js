@@ -18,6 +18,7 @@ class User extends Component {
           { text: 'Ok', onPress: () => {
             this.props.logout()
             browserCookie.erase('userid')
+            this.props.history.push('/login')
           }},
         ])
     }
@@ -39,7 +40,7 @@ class User extends Component {
                             Sign Out
                         </Item>
                     </List>
-                </div>: <Redirect to={this.props.redirectTo} />
+                </div>: null
             
         )
     }

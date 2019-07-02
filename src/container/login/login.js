@@ -17,6 +17,9 @@ class Login extends Component {
             pwd:''
         }
     }
+    componentDidMount(){
+        console.log(this.props)
+    }
     register = () => {
         this.props.history.push('/register')
     }
