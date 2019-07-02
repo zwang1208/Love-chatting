@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {TabBar} from 'antd-mobile'
 import {withRouter} from 'react-router'
 import {connect} from 'react-redux'
+import '../../index.css'
 
 @withRouter
 // @connect(

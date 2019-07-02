@@ -7,9 +7,10 @@ const User = model.getModel('user')
 const _filter = {pwd: 0, __v: 0}
 
 Router.get('/list', function(req, res){
-    //git User.remove({},function(e,d){}) //remove all items
-    User.find({}, function(err, doc){
-        return res.json(doc)
+    //User.remove({},function(e,d){}) //remove all items
+    const {type} = req.query
+    User.find({type}, function(err, doc){
+        return res.json({code:0, data:doc})
     })
 })
 Router.get('/info', function(req, res){

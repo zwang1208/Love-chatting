@@ -59,3 +59,22 @@ export const update = (data) =>{
             })
     }
 }
+
+const userList = (data) => {
+    return {type: types.USER_LIST, payload: data}
+}
+
+export const getUserList = (type) => {
+    return dispatch=>{
+        axios.get('/user/list?type='+type)
+            .then(res=>{
+                if(res.data.code === 0) {
+                    dispatch(userList(res.data.data))
+                }
+            })
+    }
+}
+
+export const logout = () => {
+    return {type: types.LOG_OUT}
+}

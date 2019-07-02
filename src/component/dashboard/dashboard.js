@@ -4,17 +4,12 @@ import { NavBar } from 'antd-mobile';
 import { Switch, Route } from 'react-router-dom'
 import NavLinkbar from '../navlink/navlink'
 
-function Service() {
-    return <h1>Service</h1>
-}
-function Client() {
-    return <h1>Client</h1>
-}
+import Service from '../../component/service/service'
+import Client from '../../component/client/client'
+import User from '../../component/user/user'
+
 function Msg() {
     return <h1>Msg</h1>
-}
-function User() {
-    return <h1>User</h1>
 }
 
 @connect(

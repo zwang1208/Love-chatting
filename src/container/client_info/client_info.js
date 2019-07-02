@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { NavBar, InputItem, TextareaItem, Button } from 'antd-mobile'
+import { NavBar, InputItem, Button } from 'antd-mobile'
 import { update } from '../../actions/user_actions'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
@@ -11,7 +11,7 @@ class ClientInfo extends Component {
         super(props)
         this.state = {
             title: '',
-            description: ''
+            institution: ''
         }
     }
     handlechange = (key, val) => {
@@ -35,11 +35,9 @@ class ClientInfo extends Component {
                 <InputItem onChange={(v)=>this.handlechange('title', v)}>
                     Title
                 </InputItem>
-                <TextareaItem 
-                    title = 'Description'
-                    rows = {3}
-                    onChange={(v)=>this.handlechange('description', v)}>
-                </TextareaItem>
+                <InputItem onChange={(v)=>this.handlechange('institution', v)}>
+                    Institution
+                </InputItem>
                 <Button
                     onClick = {() => this.props.update(this.state)}
                     type = 'primary'

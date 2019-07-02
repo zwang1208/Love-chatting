@@ -16,7 +16,7 @@ const models = {
         'desc' : {type: String},
         'title' : {type: String},
         'serviceType' : {type: String},
-        'description' : {type: String}
+        'institution': {type:String}
     },
     chat: {
 
