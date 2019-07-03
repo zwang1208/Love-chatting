@@ -8,28 +8,19 @@ import UserName from '../../static/img/yonghuming.png'
 import Password from '../../static/img/mima.png'
 
 import { login } from '../../actions/user_actions'
+import hocForm from '../../component/formHoc/formHoc'
 
+@hocForm
 class Login extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            userName:'',
-            pwd:''
-        }
-    }
+
     componentDidMount(){
         console.log(this.props)
     }
     register = () => {
         this.props.history.push('/register')
     }
-    handleChange = (key, val) => {
-        this.setState({
-            [key]:val
-        })
-    }
     handleLogin = () => {
-        this.props.login(this.state)
+        this.props.login(this.props.state)
     }
     render() {
         const path = this.props.location.pathname
@@ -43,14 +34,14 @@ class Login extends Component {
                     <List>
                         <InputItem
                             placeholder = 'Username'
-                            onChange = {v=>this.handleChange('userName', v)}
+                            onChange = {v=>this.props.handleChange('userName', v)}
                         >
                             <div style={{ backgroundImage: `url(${UserName})`, backgroundSize: 'cover', height: '22px', width: '22px' }} />
                         </InputItem>
                         <InputItem
                             placeholder = 'Password'
                             type = 'password'
-                            onChange = {v=>this.handleChange('pwd', v)}
+                            onChange = {v=>this.props.handleChange('pwd', v)}
                         >
                             <div style={{ backgroundImage: `url(${Password})`, backgroundSize: 'cover', height: '22px', width: '22px' }} />
                         </InputItem>

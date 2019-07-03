@@ -1,5 +1,8 @@
 import * as types from '../constants/action_types'
 import axios from 'axios';
+import io from 'socket.io-client'
+
+const socket = io('ws://localhost:9093')
 
 const errMsg = (msg) => {
     return {type: types.ERROR_MSG, msg}
@@ -77,4 +80,38 @@ export const getUserList = (type) => {
 
 export const logout = () => {
     return {type: types.LOG_OUT}
+}
+
+export const getMsgList = () => {
+    return dispatch=>{
+        axios.get('/user/msglist')
+            .then(res=>{
+                if(res.status === 200 & res.data.code === 0){
+                    dispatch(msgList(res.data.msgs))
+                }
+            })
+    }
+}
+
+function msgList(msgs){
+    return{type: types.MSG_LIST, payload: msgs}
+}
+
+export const sendMsg = ({from, to, msg}) => {
+    return dispatch =>{
+        socket.emit('sendmsg', {from, to, msg})
+    }
+}
+
+function msgRecv(data) {
+    return{type: types.MSG_RECV, payload:data}
+}
+
+export const recvMsg = () =>{
+    return dispatch=>{
+        socket.on('recvmsg', function(data){
+            console.log(data)
+            dispatch(msgRecv(data))
+        })
+    }
 }

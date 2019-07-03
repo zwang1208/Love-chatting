@@ -13,6 +13,7 @@ import AuthRoute from './component/authRoute/authRoute'
 import ServiceInfo from './container/service_info/service_info'
 import ClientInfo from './container/client_info/client_info'
 import Dashboard from './component/dashboard/dashboard'
+import Chat from './component/chat/chat'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -31,6 +32,7 @@ ReactDOM.render(
                         <Route path='/register' component={Register}></Route>
                         <Route path='/serviceinfo' component={ServiceInfo}></Route>
                         <Route path='/clientinfo' component={ClientInfo}></Route>
+                        <Route path='/chat/:userName' component={Chat}></Route>
                         <Route component={Dashboard}></Route>
                     </Switch>
                 </div>

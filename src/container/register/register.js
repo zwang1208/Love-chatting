@@ -11,26 +11,17 @@ import Service from '../../static/img/kefu.png'
 import { Redirect } from 'react-router-dom'
 
 import { register } from '../../actions/user_actions'
+import hocForm from '../../component/formHoc/formHoc'
 
 const RadioItem = Radio.RadioItem;
 
+@hocForm
 class Register extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            userName: '',
-            pwd: '',
-            repeatPwd: '',
-            type: 'Client'
-        }
-    }
-    handleChange = (key, val) => {
-        this.setState({
-            [key]:val
-        })
+    componentDidMount(){
+        this.props.handleChange('type','Client')
     }
     handleRegister = () => {
-        this.props.register(this.state)
+        this.props.register(this.props.state)
     }
     render() {
         return (
@@ -42,33 +33,33 @@ class Register extends Component {
                     <List>
                         <InputItem
                             placeholder = 'Username'
-                            onChange = {v=>this.handleChange('userName', v)}
+                            onChange = {v=>this.props.handleChange('userName', v)}
                         >
                             <div style={{ backgroundImage: `url(${UserName})`, backgroundSize: 'cover', height: '22px', width: '22px' }} />
                         </InputItem>
                         <InputItem
                             placeholder = 'Password'
-                            onChange = {v=>this.handleChange('pwd', v)}
+                            onChange = {v=>this.props.handleChange('pwd', v)}
                             type='password'
                         >
                             <div style={{ backgroundImage: `url(${Password})`, backgroundSize: 'cover', height: '22px', width: '22px' }} />
                         </InputItem>
                         <InputItem
                             placeholder = 'Confirm Password'
-                            onChange = {v=>this.handleChange('repeatPwd', v)}
+                            onChange = {v=>this.props.handleChange('repeatPwd', v)}
                             type='password'
                         >
                             <div style={{ backgroundImage: `url(${Password})`, backgroundSize: 'cover', height: '22px', width: '22px' }} />
                         </InputItem>
                         <RadioItem
-                            checked={this.state.type === 'Client'}
-                            onChange = {()=>this.handleChange('type', 'Client')}
+                            checked={this.props.state.type === 'Client'}
+                            onChange = {()=>this.props.handleChange('type', 'Client')}
                         >
                             <div style={{ backgroundImage: `url(${Client})`, backgroundSize: 'cover', height: '22px', width: '22px' }} />
                         </RadioItem>
                         <RadioItem
-                            checked={this.state.type === 'Service'}
-                            onChange = {()=>this.handleChange('type', 'Service')}
+                            checked={this.props.state.type === 'Service'}
+                            onChange = {()=>this.props.handleChange('type', 'Service')}
                         >
                             <div style={{ backgroundImage: `url(${Service})`, backgroundSize: 'cover', height: '22px', width: '22px' }} />
                         </RadioItem>
